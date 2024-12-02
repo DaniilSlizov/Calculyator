@@ -1,5 +1,6 @@
 package com.example.calculyator;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -9,12 +10,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.calculyator.R;
-
 public class MainActivity extends AppCompatActivity {
 
     // Объявление кнопок и элементов интерфейса
-    private Button buttonAdd, buttonSubtract, buttonDivide, buttonMultiply, buttonClean, buttonStepen;
+    private Button buttonAdd, buttonSubtract, buttonDivide, buttonMultiply, buttonClean, buttonStepen, buttonDeveloper;
     private TextView operation, result;
     private EditText number1, number2;
 
@@ -36,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         buttonSubtract = findViewById(R.id.buttonSubtract); // Кнопка вычитания
         buttonDivide = findViewById(R.id.buttonDivide); // Кнопка деления
         buttonMultiply = findViewById(R.id.buttonMultiply); // Кнопка умножения
+        buttonDeveloper = findViewById(R.id.buttonDeveloper); // Кнопка "О разработчике"
         buttonClean = findViewById(R.id.buttonClean); // Кнопка очистки
         buttonStepen = findViewById(R.id.buttonStepen); // Кнопка возведения в степень
         operation = findViewById(R.id.operation); // Текстовое поле для отображения операции
@@ -52,9 +52,15 @@ public class MainActivity extends AppCompatActivity {
         buttonDivide.setOnClickListener(v -> calculate("/")); // Обработчик для деления
         buttonStepen.setOnClickListener(v -> calculate("^")); // Обработчик для возведения в степень
         buttonClean.setOnClickListener(v -> clearFields()); // Обработчик для очистки чисел и операций
+
+        // Обработчик для кнопки "О разработчике"
+        buttonDeveloper.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, MainActivity2.class); // Создание интента для перехода
+            startActivity(intent); // Запуск новой активности
+        });
     }
 
-    // Метод для выполнения вычислений в зависимости от выбранной операции
+    // Остальной код остается без изменений...
     private void calculate(String op) {
         if (isInputValid()) { // Проверка на корректность ввода
             double num1 = Double.parseDouble(number1.getText().toString()); // Процесс анализа первого числа
